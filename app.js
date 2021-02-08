@@ -11,27 +11,34 @@ It turns out '.slice()' returns everything from the first zero-based index we pr
 
 This way, you don't actually manipulate 'process.argv', but rather create a new array based on the values from the third index and on. */
 
+// Array that holds the user command-line arguments
+const profileDataArgs = process.argv.slice(2, process.argv.length);
 
-const profileDataArgs = process.argv.slice(2);
+// Extracting the above arguments and storing them into distinct variables. One way is using th array index. 
+      //--------Reference code/Not needed--------// 
+      // const name = profileDataArgs[0];
+      // const github = profileDataArgs[1];
+      //--------Reference code/Not needed--------//
+// Alternatively, we can use an ES6 feature called assignment destructuring. In basic terms, it assigns elements of an array to variable names in a single expression, as shown here:
+const [name, github] = profileDataArgs;
 
+      //--------Reference code/Not needed--------//
+      /* ////Instructed to comment out all this code to use as reference, but no longer needed....////
+      const printProfileData = profileDataArr => {
+        // This...
+        for (let i = 0; i < profileDataArr.length; i += 1) {
+          console.log(profileDataArr[i]);
+        }
 
-//--------Reference code/Not needed--------//
-/* ////Instructed to comment out all this code to use as reference, but no longer needed....////
-const printProfileData = profileDataArr => {
-  // This...
-  for (let i = 0; i < profileDataArr.length; i += 1) {
-    console.log(profileDataArr[i]);
-  }
+        console.log('================');
 
-  console.log('================');
+        // Is the same as this... This is the exact same thing as using a for loop to iterate through an array, and using 'arrayName[i]' syntax to access the array at that iteration, except it's a lot cleaner and meant specifically for arrays.
+        profileDataArr.forEach(profileItem => console.log(profileItem));
+      };
 
-  // Is the same as this... This is the exact same thing as using a for loop to iterate through an array, and using 'arrayName[i]' syntax to access the array at that iteration, except it's a lot cleaner and meant specifically for arrays.
-  profileDataArr.forEach(profileItem => console.log(profileItem));
-};
-
-printProfileData(profileDataArgs);
-*/
-//--------Reference code/Not needed--------//
+      printProfileData(profileDataArgs);
+      */
+      //--------Reference code/Not needed--------//
 
 /* ////Explaining this specific arrow function syntax://// This function returns a string. Parentheses are unnecessary in arrow functions when there is one parameter. In this function, which has no parameters, we need parentheses to hold the place where parameters would've been.This function returns a string. Parentheses are unnecessary in arrow functions when there is one parameter. In this function, which has no parameters, we need parentheses to hold the place where parameters would've been.
 
@@ -41,7 +48,43 @@ Also notice the conspicuous absence of the 'return' keyword. Normally, to 'retur
 
 With ES6, we can use a feature called template literals to embed JavaScript expressions into the string. Template literals are enclosed by backticks (`) instead of double or single quotes.
 
-Although backticks may look similar to single quotes ('), they operate differently, which we'll explain in the following section. With template literals, we can wrap the string in backticks and interpolate the variables with the '${<variable>}' syntax.*/
+Although backticks may look similar to single quotes ('), they operate differently, which we'll explain in the following section. With template literals, we can wrap the string in backticks and interpolate the variables with the '${<variable>}' syntax.
 
-const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;
-console.log(generatePage('Jane', 'janehub'));
+Initial Example Code: 'const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;'     */
+
+/*  ////Multi-line Strings:////  Template literals allow us to do easily something that would be difficult with regular strings: multi-line text.
+
+To do this, simply enter a keyboard return in the template literal wherever you want a line break to occur, just as you would do if you were entering a line break in a word processor.  */
+
+      //--------Reference code/Not needed--------//
+      // const generatePage = (userName, githubName) => {
+      //   return `
+      //     Name: ${userName}
+      //     GitHub: ${githubName}
+      //   `;
+      // };
+      //--------Reference code/Not needed--------//
+
+// Modify the function commented out above so it actually generates HTML
+const generatePage = (name, github) => {
+  return `
+  <!DOCTYPE html> 
+  <html lang="en"> 
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Portfolio Demo</title>
+  </head>
+
+  <body>
+    <h1>${name}</h1>
+    <h2><a href="https://github.com/${github}">Github</a></h2>
+  </body>
+  </html>
+  `;
+};
+
+
+console.log(name, github);
+console.log(generatePage(name, github));
