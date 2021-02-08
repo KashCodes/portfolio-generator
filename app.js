@@ -1,3 +1,6 @@
+// in order to use the 'fs' module, we need the following statement at the top of the JavaScript file
+const fs = require('fs');
+
 /* ////process.argv Explaination://// In Node.js, process is a global object that represents everything going on with this particular app. You can compare it to document or window in the browser, as it's always present in the context of the runtime environment. If you console.log(process), you'll see that it's a gigantic object holding data providing context to where the app was executed. This includes your operating system, what command line you're using, and a ton more.
 
 The argv property of process is an array that holds exactly what was typed into the command line upon execution so that we can capture that data and use it in the app. The first two indexes of process.argv simply represent Node.js and the file we executed, so we don't typically need to use them. But we do want to use whatever comes next.Let's use an array method to create a new array with everything that comes after 'process.argv[1]'.
@@ -85,6 +88,12 @@ const generatePage = (name, github) => {
   `;
 };
 
+/* ////File System Explaination://// The file system is considered a module in Node.js's core library. A module can be a function, a class, an object, or simple variables. Whatever its form, a module is a reusable piece of code that can be imported to anywhere it's needed. A function called 'fs.writeFile()' can create multiple file types, including TXT, PDF, HTML, JSON, and more. The 'fs.writeFile()' function definition has three arguments. The first argument is the name of the file that's being created. The next argument is the data that will write onto the file, in this case the HTML template literal. The last parameter is a callback function that will be used for error handling.   */
 
-console.log(name, github);
-console.log(generatePage(name, github));
+// fs module function to create HTML file. First arugement is  Named 'index.html' for output file, the second argument is  'generatePage()' function which display the data being written (the HTML string template), the third argument is the callback function that will handle any errrors as well as the success message (console.log).  ---- Additionally, When an arrow function has one argument, parentheses are optional. However, when there are no arguments—or more than one—parentheses are necessary.
+// 
+fs.writeFile('index.html', generatePage(name, github), err => {
+  if (err) throw err;
+
+  console.log('Portfolio complete! Check out index.html to see the output!');
+});
