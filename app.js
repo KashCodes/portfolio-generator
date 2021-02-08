@@ -14,6 +14,9 @@ This way, you don't actually manipulate 'process.argv', but rather create a new 
 
 const profileDataArgs = process.argv.slice(2);
 
+
+//--------Reference code/Not needed--------//
+/* ////Instructed to comment out all this code to use as reference, but no longer needed....////
 const printProfileData = profileDataArr => {
   // This...
   for (let i = 0; i < profileDataArr.length; i += 1) {
@@ -27,3 +30,18 @@ const printProfileData = profileDataArr => {
 };
 
 printProfileData(profileDataArgs);
+*/
+//--------Reference code/Not needed--------//
+
+/* ////Explaining this specific arrow function syntax://// This function returns a string. Parentheses are unnecessary in arrow functions when there is one parameter. In this function, which has no parameters, we need parentheses to hold the place where parameters would've been.This function returns a string. Parentheses are unnecessary in arrow functions when there is one parameter. In this function, which has no parameters, we need parentheses to hold the place where parameters would've been.
+
+Also notice the conspicuous absence of the 'return' keyword. Normally, to 'return' something from a function, we'd need a 'return' statement to explicitly state the 'return' value; otherwise, 'undefined' would be returned. But in the special case when a function has only a single statement, the curly braces, {}, are unnecessary and the 'return' statement is implied. */
+
+/* ////Explaination of Template Literals://// To make this function dynamic, we could add arguments to the function expression, then insert the data into the string using interpolation, which is the substitution of text for a variable we build into the string.
+
+With ES6, we can use a feature called template literals to embed JavaScript expressions into the string. Template literals are enclosed by backticks (`) instead of double or single quotes.
+
+Although backticks may look similar to single quotes ('), they operate differently, which we'll explain in the following section. With template literals, we can wrap the string in backticks and interpolate the variables with the '${<variable>}' syntax.*/
+
+const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;
+console.log(generatePage('Jane', 'janehub'));
