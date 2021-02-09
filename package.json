@@ -1,12 +1,8 @@
 {
   "name": "portfolio-generator",
   "version": "1.0.0",
-  "description": "generates portfolios automatically into an index.html file",
+  "description": "Genterates Portfolio index.html page",
   "main": "app.js",
-  "dependencies": {
-    "inquirer": "^7.3.3"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,17 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/KashCodes/portfolio-generator.git"
   },
-  "keywords": [
-    "portfolio",
-    "generator",
-    "JavaScript",
-    "Node.js",
-    "Inquierer"
-  ],
   "author": "Kashay Arbelo",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/KashCodes/portfolio-generator/issues"
   },
-  "homepage": "https://github.com/KashCodes/portfolio-generator#readme"
+  "homepage": "https://github.com/KashCodes/portfolio-generator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
 }
