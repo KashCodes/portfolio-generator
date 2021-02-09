@@ -3,6 +3,11 @@ const fs = require('fs');
 
 //-------------
 
+
+const inquirer = require('inquirer');
+
+//-------------
+
 //So, because we added the module.exports statement at the end of the page-template.js file (with module.exports set to our generatePage() function), we can now use the require statement to include generatePage() at the top of the app.js file.
 const generatePage = require('./src/page-template.js');
 
