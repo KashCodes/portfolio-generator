@@ -1,6 +1,13 @@
 // in order to use the 'fs' module, we need the following statement at the top of the JavaScript file
 const fs = require('fs');
 
+//-------------
+
+//So, because we added the module.exports statement at the end of the page-template.js file (with module.exports set to our generatePage() function), we can now use the require statement to include generatePage() at the top of the app.js file.
+const generatePage = require('./src/page-template.js');
+
+//-------------
+
 /* ////process.argv Explaination://// In Node.js, process is a global object that represents everything going on with this particular app. You can compare it to document or window in the browser, as it's always present in the context of the runtime environment. If you console.log(process), you'll see that it's a gigantic object holding data providing context to where the app was executed. This includes your operating system, what command line you're using, and a ton more.
 
 The argv property of process is an array that holds exactly what was typed into the command line upon execution so that we can capture that data and use it in the app. The first two indexes of process.argv simply represent Node.js and the file we executed, so we don't typically need to use them. But we do want to use whatever comes next.Let's use an array method to create a new array with everything that comes after 'process.argv[1]'.
@@ -16,6 +23,8 @@ This way, you don't actually manipulate 'process.argv', but rather create a new 
 
 // Array that holds the user command-line arguments
 const profileDataArgs = process.argv.slice(2, process.argv.length);
+
+//-------------
 
 // Extracting the above arguments and storing them into distinct variables. One way is using th array index. 
       //--------Reference code/Not needed--------// 
@@ -47,46 +56,7 @@ const [name, github] = profileDataArgs;
 
 Also notice the conspicuous absence of the 'return' keyword. Normally, to 'return' something from a function, we'd need a 'return' statement to explicitly state the 'return' value; otherwise, 'undefined' would be returned. But in the special case when a function has only a single statement, the curly braces, {}, are unnecessary and the 'return' statement is implied. */
 
-/* ////Explaination of Template Literals://// To make this function dynamic, we could add arguments to the function expression, then insert the data into the string using interpolation, which is the substitution of text for a variable we build into the string.
-
-With ES6, we can use a feature called template literals to embed JavaScript expressions into the string. Template literals are enclosed by backticks (`) instead of double or single quotes.
-
-Although backticks may look similar to single quotes ('), they operate differently, which we'll explain in the following section. With template literals, we can wrap the string in backticks and interpolate the variables with the '${<variable>}' syntax.
-
-Initial Example Code: 'const generatePage = (userName, githubName) => `Name: ${userName}, Github: ${githubName}`;'     */
-
-/*  ////Multi-line Strings:////  Template literals allow us to do easily something that would be difficult with regular strings: multi-line text.
-
-To do this, simply enter a keyboard return in the template literal wherever you want a line break to occur, just as you would do if you were entering a line break in a word processor.  */
-
-      //--------Reference code/Not needed--------//
-      // const generatePage = (userName, githubName) => {
-      //   return `
-      //     Name: ${userName}
-      //     GitHub: ${githubName}
-      //   `;
-      // };
-      //--------Reference code/Not needed--------//
-
-// Modify the function commented out above so it actually generates HTML
-const generatePage = (name, github) => {
-  return `
-  <!DOCTYPE html> 
-  <html lang="en"> 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Portfolio Demo</title>
-  </head>
-
-  <body>
-    <h1>${name}</h1>
-    <h2><a href="https://github.com/${github}">Github</a></h2>
-  </body>
-  </html>
-  `;
-};
+//-------------
 
 /* ////File System Explaination://// The file system is considered a module in Node.js's core library. A module can be a function, a class, an object, or simple variables. Whatever its form, a module is a reusable piece of code that can be imported to anywhere it's needed. A function called 'fs.writeFile()' can create multiple file types, including TXT, PDF, HTML, JSON, and more. The 'fs.writeFile()' function definition has three arguments. The first argument is the name of the file that's being created. The next argument is the data that will write onto the file, in this case the HTML template literal. The last parameter is a callback function that will be used for error handling.   */
 
