@@ -89,15 +89,99 @@ fs.writeFile('index.html', generatePage(name, github), err => {
 
 /* Notice that inquirer's prompt method can receive an array of objects in its argument, known as the question object. The properties of the question object identify the type, name, and question message of this particular question. "Input" was chosen as the type of question because the answer will be a text reply. The answer object is returned as a Promise. */ 
 
-// Start Inquirer prompts. 
-inquirer
-.prompt([
-  {
-    type: 'input',
-    name: 'name',
-    message: 'What is your name?'
+// Start Inquirer prompts. In a function so that it can be invoked on demand within the flow of the application. Here we're calling a function that returns the result of inquire.prompt, which is a Promise.
+const promptUser = () => {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What is your name?'
+    },
+    {
+      type: 'input',
+      name: 'github',
+      message: 'Enter your GitHub Username'
+    },
+    {
+      type: 'input',
+      name: 'about',
+      message: 'Provide some information about yourself:'
+    }
+  ]);
+};
+
+// Project related questions done using checkbox type, list of answers, and booleans
+const promptProject = portfolioData => {
+  console.log(`
+=================
+Add a New Project
+=================
+`);
+
+  // If there's no 'projects' array property, create one
+  if (!portfolioData.projects) {
+    portfolioData.projects = [];
   }
-])
-.then(answers => console.log(answers));
+  return inquirer
+    .prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'What is the name of your project?'
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: 'Provide a description of the project (Required)'
+      },
+      {
+        type: 'checkbox',
+        name: 'languages',
+        message: 'What did you build this project with? (Check all that apply)',
+        choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
+      },
+      {
+        type: 'input',
+        name: 'link',
+        message: 'Enter the GitHub link to your project. (Required)'
+      },
+      {
+        type: 'confirm',
+        name: 'feature',
+        message: 'Would you like to feature this project?',
+        default: false
+      },
+      {
+        type: 'confirm',
+        name: 'confirmAddProject',
+        message: 'Would you like to enter another project?',
+        default: false
+      }
+    ])
+    // Once the data has been collected by inquirer, you need to add the project data to the projects array.
+    .then(projectData => {
+      // We use the array method push() to place the projectData from inquirer into the new projects array we just created.
+      portfolioData.projects.push(projectData);
+      // A if condition that will call the promptProject(portfolioData) function when confirmAddProject evaluates to true
+      if (projectData.confirmAddProject) {
+        // if true then re-run the 'promptProject => portfolioData {}' function/questions.
+        return promptProject(portfolioData);
+      } else {
+        // if false then just 'return' the first project data from original entry. We have to return the portfolioData in the else statement explicitly so that the object is returned. This is a critical step to retrieving the user's answer and building an HTML template.
+        return portfolioData;
+      }
+    });
+};
+
+// Just like fetch(), which we covered previously, the Promise will resolve with a .then() method. We therefore append the .then() method to the function call, since it returns a Promise, and we put into .then() whatever we wish to take place after the Promise is resolved.
+promptUser()
+  //Using Promises, we can chain the functions together using the then() method.
+  then(promptProject)
+  .then(portfolioData => {
+    console.log(portfolioData);
+  });
+  
+
+
 
 
