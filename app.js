@@ -119,7 +119,26 @@ const promptUser = () => {
         }
       }
     },
-    
+    // Asks would you like to add about you? Will only proceed with next questions if true. 
+    {
+      type: 'confirm',
+      name: 'confirmAbout',
+      message: 'Would you like to enter some information about yourself for an "About" section?',
+      default: true
+    },
+    // We then added the prompt looking for information about the user called when. This is like the validate method we used previously, but instead of passing the value entered for that specific question in as the parameter, it passes an object of all of the answers given so far as an object.
+    {
+      type: 'input',
+      name: 'about',
+      message: 'Provide some information about yourself:',
+      when: ({ confirmAbout }) => {
+        if (confirmAbout) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
   ]);
 };
 
