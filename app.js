@@ -176,7 +176,7 @@ Add a New Project
 // Just like fetch(), which we covered previously, the Promise will resolve with a .then() method. We therefore append the .then() method to the function call, since it returns a Promise, and we put into .then() whatever we wish to take place after the Promise is resolved.
 promptUser()
   //Using Promises, we can chain the functions together using the then() method.
-  then(promptProject)
+  .then(promptProject)
   .then(portfolioData => {
     console.log(portfolioData);
   });
