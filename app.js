@@ -3,15 +3,15 @@ const inquirer = require('inquirer');
 
 //-------------
 
-/*         ~~~~~~~~~~~Don't need for now~~~~~~~~~ 
+
 // in order to use the 'fs' module, we need the following statement at the top of the JavaScript file
 const fs = require('fs');
 
 //-------------
 
 //So, because we added the module.exports statement at the end of the page-template.js file (with module.exports set to our generatePage() function), we can now use the require statement to include generatePage() at the top of the app.js file.
-const generatePage = require('./src/page-template.js');
-         ~~~~~~~~~~~Don't need for now~~~~~~~~~ */
+const generatePage = require('./src/page-template');
+
 
 //------------- No longer need this code/process.argv bc we will be using inquirer.----------//
 
@@ -233,11 +233,17 @@ Add a New Project
 promptUser()
   //Using Promises, we can chain the functions together using the then() method.
   .then(promptProject)
-  .then(portfolioData => {
-    console.log(portfolioData);
+  .then(portfolioData => {    
+    const pageHTML = generatePage(portfolioData);
+
+
+    // fs.writeFile('./index.html', pageHTML, err => {
+    //   if (err) throw new Error(err);
+
+    //   console.log('Page created! Check out index.html in this directory to see it!');
+    // });
   });
-  
 
 
-
+//  const pageHTML = generatePage(mockData);
 

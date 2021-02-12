@@ -20,10 +20,18 @@ To do this, simply enter a keyboard return in the template literal wherever you 
       //--------Reference code/Not needed--------//
 
 // Modify the function commented out above so it actually generates HTML
-const generatePage = (name, github) => {
+module.exports = templateData => {
+  console.log(templateData);
+
+  // this will create three variables based on data in templateData
+const { projects, about, ...header } = templateData;
+console.log(projects);
+console.log(about);
+console.log(header);
   return `
-  <!DOCTYPE html> 
-  <html lang="en"> 
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,15 +40,14 @@ const generatePage = (name, github) => {
   </head>
 
   <body>
-    <h1>${name}</h1>
-    <h2><a href="https://github.com/${github}">Github</a></h2>
+    <h1>${templateData.name}</h1>
+    <h2><a href="https://github.com/${templateData.github}">Github</a></h2>
   </body>
   </html>
   `;
 };
 
-
 //-------------
 
 // In order to use functions from one module inside another, we use the related statements module.exports and require. In the source file that has the functions we want to make available to other files, we use module.exports at its bottom. In the destination file(s) that we want to receive those exported functions, we put require at the top.
-module.exports = generatePage;
+// module.exports = generatePage;
